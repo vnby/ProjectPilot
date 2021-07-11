@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PilotController {
-    @Autowired
-    private  PilotService pilotService;
+    private final PilotService pilotService;
 
     public PilotController(PilotService pilotService) {
         this.pilotService = pilotService;
@@ -28,5 +27,14 @@ public class PilotController {
         PilotModel pilot = new PilotModel(id, licenseNumber, name, flyHour);
         pilotService.addPilot(pilot);
         return "add";
+    }
+
+    @RequestMapping("/pilot/view")
+    public String view(@RequestParam("licenseNumber") String licenseNumber,
+                       Model model) {
+        PilotModel archive = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
+
+        model.addAttribute("pilot", archive);
+        return "view-pilot";
     }
 }
