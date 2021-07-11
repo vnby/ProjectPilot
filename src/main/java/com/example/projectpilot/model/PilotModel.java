@@ -6,7 +6,11 @@ public class PilotModel {
     private String name;
     private Integer flyHour;
 
-    public PilotModel() {
+    public PilotModel(String id, String licenseNumber, String name, Integer flyHour) {
+        this.id = id;
+        this.licenseNumber = licenseNumber;
+        this.name = name;
+        this.flyHour = flyHour;
     }
 
     public String getId() {
